@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">RealmApp</string>
+
+    <string-array name="servers">
+        <item>local</item>
+        <item>fast-mobile</item>
+    </string-array>
+
+</resources>
