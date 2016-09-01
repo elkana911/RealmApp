@@ -1,24 +1,12 @@
 package id.co.ppu.realmapp;
 
-import android.os.PersistableBundle;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 
-import com.facebook.stetho.common.StringUtil;
 import com.github.dkharrat.nexusdialog.FormWithAppCompatActivity;
-import com.github.dkharrat.nexusdialog.controllers.CheckBoxController;
-import com.github.dkharrat.nexusdialog.controllers.DatePickerController;
 import com.github.dkharrat.nexusdialog.controllers.EditTextController;
 import com.github.dkharrat.nexusdialog.controllers.FormSectionController;
-import com.github.dkharrat.nexusdialog.controllers.SearchableSelectionController;
-import com.github.dkharrat.nexusdialog.controllers.SelectionController;
-import com.github.dkharrat.nexusdialog.controllers.TimePickerController;
 
-import java.util.Arrays;
-
-import difflib.StringUtills;
-import id.co.ppu.realmapp.pojo.User;
+import id.co.ppu.realmapp.pojo.MstSecUser;
 import io.realm.Realm;
 
 public class EditUserActivity extends FormWithAppCompatActivity {
@@ -35,7 +23,7 @@ public class EditUserActivity extends FormWithAppCompatActivity {
         if (TextUtils.isEmpty(email)) {
             return;
         }
-        User user = realm.where(User.class).equalTo("emailAddr", email).findFirst();
+        MstSecUser user = realm.where(MstSecUser.class).equalTo("emailAddr", email).findFirst();
 
         setTitle("Edit " + user.getUserName());
 

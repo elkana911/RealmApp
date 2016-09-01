@@ -1,8 +1,5 @@
 package id.co.ppu.realmapp.rest;
 
-import java.util.List;
-
-import id.co.ppu.realmapp.pojo.User;
 import id.co.ppu.realmapp.rest.request.RequestLKP;
 import id.co.ppu.realmapp.rest.request.RequestLogin;
 import id.co.ppu.realmapp.rest.response.ResponseGetLKP;

@@ -1,13 +1,9 @@
 package id.co.ppu.realmapp;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +13,9 @@ import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import co.moonmonkeylabs.realmrecyclerview.RealmRecyclerView;
-import id.co.ppu.realmapp.pojo.User;
+import id.co.ppu.realmapp.pojo.MstSecUser;
 import io.realm.Realm;
-import io.realm.RealmBaseAdapter;
 import io.realm.RealmBasedRecyclerViewAdapter;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
@@ -52,12 +46,12 @@ public class RealmDBUsersActivity extends AppCompatActivity {
     }
 
     public void loadDataUser() {
-        RealmResults<User> all = realm.where(User.class).findAllSorted("fullName", Sort.ASCENDING);
+        RealmResults<MstSecUser> all = realm.where(MstSecUser.class).findAllSorted("fullName", Sort.ASCENDING);
 //        RealmResults<User> all = realm.where(User.class).findAllSortedAsync("fullName", Sort.ASCENDING);  //sepertinya buggy, krn ada loading progress nongol ga ilang2
 
-        all.addChangeListener(new RealmChangeListener<RealmResults<User>>() {
+        all.addChangeListener(new RealmChangeListener<RealmResults<MstSecUser>>() {
             @Override
-            public void onChange(RealmResults<User> element) {
+            public void onChange(RealmResults<MstSecUser> element) {
                 Log.e("eric.onChange", "something=" + element.size());
             }
         });
@@ -91,10 +85,10 @@ public class RealmDBUsersActivity extends AppCompatActivity {
         realm = null;
     }
 
-    public static class UserAdapter extends RealmBasedRecyclerViewAdapter<User, UserAdapter.DataViewHolder> {
+    public static class UserAdapter extends RealmBasedRecyclerViewAdapter<MstSecUser, UserAdapter.DataViewHolder> {
 
         public UserAdapter(Context context,
-                           RealmResults<User> realmResults,
+                           RealmResults<MstSecUser> realmResults,
                            boolean automaticUpdate,
                            boolean animateIdType,
                            String animateExtraColumnName) {
@@ -110,7 +104,7 @@ public class RealmDBUsersActivity extends AppCompatActivity {
 
         @Override
         public void onBindRealmViewHolder(DataViewHolder dataViewHolder, int position) {
-            final User user = realmResults.get(position);
+            final MstSecUser user = realmResults.get(position);
 
             TextView v = dataViewHolder.tvUser;
             String f = user.getFullName();
@@ -127,7 +121,7 @@ public class RealmDBUsersActivity extends AppCompatActivity {
 
         @Override
         public void onItemSwipedDismiss(int position) {
-            final User user = realmResults.get(position);
+            final MstSecUser user = realmResults.get(position);
             Toast.makeText(getContext(), "You swipe " + user.getFullName(), Toast.LENGTH_SHORT).show();
             super.onItemSwipedDismiss(position);    //harus dipanggil belakangan spy geser layoutnya, hati2 bakal hapus data jika app:rrvSwipeToDelete="true"
         }

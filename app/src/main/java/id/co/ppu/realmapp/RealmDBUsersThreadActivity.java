@@ -12,11 +12,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import id.co.ppu.realmapp.pojo.User;
+import id.co.ppu.realmapp.pojo.MstSecUser;
 import id.co.ppu.realmapp.util.Utility;
 import io.realm.Case;
 import io.realm.Realm;
-import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 public class RealmDBUsersThreadActivity extends AppCompatActivity {
@@ -38,22 +37,22 @@ public class RealmDBUsersThreadActivity extends AppCompatActivity {
         new GetData(this).execute();
     }
 
-    class GetData extends AsyncTask<Void, Void, List<User>> {
+    class GetData extends AsyncTask<Void, Void, List<MstSecUser>> {
         private Context ctx;
         public GetData(Context ctx) {
             this.ctx = ctx;
 
         }
         @Override
-        protected List<User> doInBackground(Void... params) {
+        protected List<MstSecUser> doInBackground(Void... params) {
 
             Realm realm = Realm.getDefaultInstance();
             try {
-                RealmResults<User> all = realm.where(User.class).contains("fullName", "motor", Case.INSENSITIVE).findAll();
-                List<User> list = new ArrayList<>();
+                RealmResults<MstSecUser> all = realm.where(MstSecUser.class).contains("fullName", "motor", Case.INSENSITIVE).findAll();
+                List<MstSecUser> list = new ArrayList<>();
 
                 for (int i = 0; i < all.size(); i++) {
-                    User u = realm.copyFromRealm(all.get(i));
+                    MstSecUser u = realm.copyFromRealm(all.get(i));
 
                     list.add(u);
                 }
@@ -67,11 +66,11 @@ public class RealmDBUsersThreadActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(List<User> list) {
+        protected void onPostExecute(List<MstSecUser> list) {
             super.onPostExecute(list);
 
             StringBuffer sb = new StringBuffer();
-            for (User user : list) {
+            for (MstSecUser user : list) {
                 sb.append(user.getEmailAddr()).append("\n");
             }
 

@@ -15,9 +15,8 @@ import butterknife.ButterKnife;
 import co.moonmonkeylabs.realmsearchview.RealmSearchAdapter;
 import co.moonmonkeylabs.realmsearchview.RealmSearchView;
 import co.moonmonkeylabs.realmsearchview.RealmSearchViewHolder;
-import id.co.ppu.realmapp.pojo.User;
+import id.co.ppu.realmapp.pojo.MstSecUser;
 import io.realm.Realm;
-import io.realm.RealmViewHolder;
 
 public class RealmDBSearchActivity extends AppCompatActivity {
 
@@ -56,7 +55,7 @@ public class RealmDBSearchActivity extends AppCompatActivity {
     }
 
     public class UserViewAdapter
-            extends RealmSearchAdapter<User, UserViewAdapter.DataViewHolder> {
+            extends RealmSearchAdapter<MstSecUser, UserViewAdapter.DataViewHolder> {
 
         public UserViewAdapter(@NonNull Context context, @NonNull Realm realm, @NonNull String filterKey) {
             super(context, realm, filterKey);
@@ -70,7 +69,7 @@ public class RealmDBSearchActivity extends AppCompatActivity {
 
         @Override
         public void onBindRealmViewHolder(DataViewHolder dataViewHolder, int position) {
-            final User user = realmResults.get(position);
+            final MstSecUser user = realmResults.get(position);
 
             TextView v = dataViewHolder.tvUser;
             String f = user.getFullName();

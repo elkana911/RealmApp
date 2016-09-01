@@ -17,10 +17,12 @@ import java.io.IOException;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import id.co.ppu.realmapp.pojo.MstSecUser;
+import id.co.ppu.realmapp.pojo.MstUser;
 import id.co.ppu.realmapp.pojo.TrxCollectAddr;
 import id.co.ppu.realmapp.pojo.TrxLDVDetails;
 import id.co.ppu.realmapp.pojo.TrxLDVHeader;
-import id.co.ppu.realmapp.pojo.User;
+import id.co.ppu.realmapp.pojo.UserData;
 import id.co.ppu.realmapp.rest.ApiInterface;
 import id.co.ppu.realmapp.rest.ServiceGenerator;
 import id.co.ppu.realmapp.rest.request.RequestLKP;
@@ -32,7 +34,6 @@ import id.co.ppu.realmapp.util.StopWatch;
 import id.co.ppu.realmapp.util.Utility;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
-import io.realm.RealmQuery;
 import okhttp3.HttpUrl;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         realm.addChangeListener(realmListener);
 
 
-        long count = realm.where(User.class).count();
+        long count = realm.where(MstSecUser.class).count();
         tvGetUsers.setText("Existing Users: " + count + " users");
         btnPlayRealm.setText("Display " + count + " users");
         btnDisplayWithSearch.setText("Display " + count + " users and search");
@@ -163,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.btnEditFormUser)
     public void onStartActivityEditFormUser() {
 
-        User first = realm.where(User.class).equalTo("emailAddr", "PMP02@radanafinance.co.id").findFirst();
+        MstSecUser first = realm.where(MstSecUser.class).equalTo("emailAddr", "PMP02@radanafinance.co.id").findFirst();
 
         if (first == null) {
             Utility.showDialog(this, "Error", "no data");
@@ -182,8 +183,8 @@ public class MainActivity extends AppCompatActivity {
                 ServiceGenerator.createService(ApiInterface.class, buildUrl());
 
         RequestLogin request = new RequestLogin();
-        request.setId("MUM01");
-        request.setPwd("12345");
+        request.setId("21150164");
+        request.setPwd("23011987");
 
         final ProgressDialog mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
@@ -208,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         Utility.saveObjPreference(getApplicationContext(), "user", respLogin.getData());
 
-                        tvGetLogin.setText(Utility.getObjPreference(getApplicationContext(), "user", User.class).toString() + "\n\n" + sw.stopAndGetAsString());
+                        tvGetLogin.setText(Utility.getObjPreference(getApplicationContext(), "user", UserData.class).toString() + "\n\n" + sw.stopAndGetAsString());
 //                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         Utility.toast(getApplicationContext(), "Login Success");
                     }
@@ -287,13 +288,19 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void execute(Realm bgRealm) {
                                 // wipe existing tables?
-                                long count = bgRealm.where(User.class).count();
+                                long count = bgRealm.where(MstSecUser.class).count();
                                 if (count > 0) {
-                                    bgRealm.delete(User.class);
+                                    bgRealm.delete(MstSecUser.class);
                                 }
+                                count = bgRealm.where(MstUser.class).count();
+                                if (count > 0) {
+                                    bgRealm.delete(MstUser.class);
+                                }
+
                                 swInsert.start();
 //                                count = bgRealm.where(User.class).count();
-                                bgRealm.copyToRealmOrUpdate(respGetUsers.getData());
+                                bgRealm.copyToRealmOrUpdate(respGetUsers.getData().getUser());
+                                bgRealm.copyToRealmOrUpdate(respGetUsers.getData().getSecUser());
 //                                count = bgRealm.where(User.class).count();
 
                             }
@@ -303,8 +310,8 @@ public class MainActivity extends AppCompatActivity {
                                 if (mProgressDialog.isShowing())
                                     mProgressDialog.dismiss();
 
-                                User aUser = realm.where(User.class).findFirst();
-                                int count = respGetUsers.getData().size();
+                                MstSecUser aUser = realm.where(MstSecUser.class).findFirst();
+                                int count = respGetUsers.getData().getSecUser().size();
 
                                 btnPlayRealm.setText("Display " + count + " users");
                                 btnDisplayWithSearch.setText("Display " + count + " users and search");

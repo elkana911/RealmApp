@@ -87,6 +87,19 @@ public class TrxLDVDetails extends RealmObject implements Serializable{
     @SerializedName("startedTimestamp")
     private Date startedTimestamp;
 
+    @SerializedName("createdTimestamp")
+    private Date createdTimestamp;
+
+    @SerializedName("createdBy")
+    private String createdBy;
+
+    @SerializedName("lastupdateBy")
+    private String lastupdateBy;
+
+    @SerializedName("lastupdateTimestamp")
+    private Date lastupdateTimestamp;
+
+
     public String getLdvNo() {
         return ldvNo;
     }
@@ -279,6 +292,38 @@ public class TrxLDVDetails extends RealmObject implements Serializable{
         this.startedTimestamp = startedTimestamp;
     }
 
+    public Date getCreatedTimestamp() {
+        return createdTimestamp;
+    }
+
+    public void setCreatedTimestamp(Date createdTimestamp) {
+        this.createdTimestamp = createdTimestamp;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getLastupdateBy() {
+        return lastupdateBy;
+    }
+
+    public void setLastupdateBy(String lastupdateBy) {
+        this.lastupdateBy = lastupdateBy;
+    }
+
+    public Date getLastupdateTimestamp() {
+        return lastupdateTimestamp;
+    }
+
+    public void setLastupdateTimestamp(Date lastupdateTimestamp) {
+        this.lastupdateTimestamp = lastupdateTimestamp;
+    }
+
     @Override
     public String toString() {
         return "TrxLDVDetails{" +
@@ -306,6 +351,10 @@ public class TrxLDVDetails extends RealmObject implements Serializable{
                 ", visitSeq=" + visitSeq +
                 ", principalOutstanding=" + principalOutstanding +
                 ", startedTimestamp=" + startedTimestamp +
+                ", createdTimestamp=" + createdTimestamp +
+                ", createdBy='" + createdBy + '\'' +
+                ", lastupdateBy='" + lastupdateBy + '\'' +
+                ", lastupdateTimestamp=" + lastupdateTimestamp +
                 '}';
     }
 }
