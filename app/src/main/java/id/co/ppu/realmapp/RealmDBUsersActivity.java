@@ -129,7 +129,7 @@ public class RealmDBUsersActivity extends AppCompatActivity {
         public void onItemSwipedDismiss(int position) {
             final User user = realmResults.get(position);
             Toast.makeText(getContext(), "You swipe " + user.getFullName(), Toast.LENGTH_SHORT).show();
-            super.onItemSwipedDismiss(position);    //harus dipanggil belakangan spy geser layoutnya
+            super.onItemSwipedDismiss(position);    //harus dipanggil belakangan spy geser layoutnya, hati2 bakal hapus data jika app:rrvSwipeToDelete="true"
         }
 
         public class DataViewHolder extends RealmViewHolder{

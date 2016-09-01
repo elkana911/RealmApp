@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class ServiceGenerator {
     public static final String SERVER_USERNAME = "admin";
-    public static final String SERVER_PWD = "admin";
+    public static final String SERVER_PWD = "4dminMobil3";
 
 //    public static final String API_BASE_URL = "http://3r1c-e3e6e83ce9:8090/"; ga bisa ga tau knp
 //    public static final String API_BASE_URL = "http://192.168.0.5:8090/";

@@ -9,6 +9,7 @@ public class LKPData{
 
     private TrxLDVHeader header;
     private List<TrxLDVDetails> details;
+    private List<TrxCollectAddr> address;
 
     public TrxLDVHeader getHeader() {
         return header;
@@ -24,5 +25,13 @@ public class LKPData{
 
     public void setDetails(List<TrxLDVDetails> details) {
         this.details = details;
+    }
+
+    public List<TrxCollectAddr> getAddress() {
+        return address;
+    }
+
+    public void setAddress(List<TrxCollectAddr> address) {
+        this.address = address;
     }
 }

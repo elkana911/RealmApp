@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".RealmDBUsersActivity" />
         <activity android:name=".RealmDBUsersThreadActivity" />
-        <activity android:name=".EditUserActivity"></activity>
+        <activity android:name=".EditUserActivity" />
+        <activity android:name=".RealmDBSearchActivity"></activity>
     </application>
 
 </manifest>

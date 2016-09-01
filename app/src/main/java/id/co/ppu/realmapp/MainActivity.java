@@ -17,6 +17,7 @@ import java.io.IOException;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import id.co.ppu.realmapp.pojo.TrxCollectAddr;
 import id.co.ppu.realmapp.pojo.TrxLDVDetails;
 import id.co.ppu.realmapp.pojo.TrxLDVHeader;
 import id.co.ppu.realmapp.pojo.User;
@@ -57,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.btnPlayRealm)
     Button btnPlayRealm;
 
+    @BindView(R.id.btnDisplayWithSearch)
+    Button btnDisplayWithSearch;
+
     @BindView(R.id.etIP)EditText etIP;
     @BindView(R.id.etPort)EditText etPort;
     @BindView(R.id.spServer)Spinner spServers;
@@ -78,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                         etPort.setText("8080");
                         break;
                     default:
-                        etIP.setText("192.168.0.16");
+                        etIP.setText("192.168.0.6");
                         etPort.setText("8090");
                 }
 
@@ -105,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         long count = realm.where(User.class).count();
         tvGetUsers.setText("Existing Users: " + count + " users");
         btnPlayRealm.setText("Display " + count + " users");
+        btnDisplayWithSearch.setText("Display " + count + " users and search");
     }
 
     @Override
@@ -143,6 +148,11 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.btnPlayRealm)
     public void onStartActivityPlayRealmDB() {
         startActivity(new Intent(this, RealmDBUsersActivity.class));
+    }
+
+    @OnClick(R.id.btnDisplayWithSearch)
+    public void onStartActivityDisplayWithSearch() {
+        startActivity(new Intent(this, RealmDBSearchActivity.class));
     }
 
     @OnClick(R.id.btnDisplayThread)
@@ -297,6 +307,7 @@ public class MainActivity extends AppCompatActivity {
                                 int count = respGetUsers.getData().size();
 
                                 btnPlayRealm.setText("Display " + count + " users");
+                                btnDisplayWithSearch.setText("Display " + count + " users and search");
 
                                 tvGetUsers.setText("[0]=" + aUser + "\n\nThere are " + count
                                         + " users\nNetworkElapsed:" + swNetworkStr
@@ -400,6 +411,12 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 bgRealm.copyToRealmOrUpdate(respGetLKP.getData().getDetails());
 
+                                // insert address
+                                count = bgRealm.where(TrxCollectAddr.class).count();
+                                if (count > 0) {
+                                    bgRealm.delete(TrxCollectAddr.class);
+                                }
+                                bgRealm.copyToRealmOrUpdate(respGetLKP.getData().getAddress());
                             }
                         }, new Realm.Transaction.OnSuccess() {
                             @Override
@@ -415,6 +432,8 @@ public class MainActivity extends AppCompatActivity {
                                 tvGetLKP.setText("Header=" + header
                                         + "\n----\nDetails[" + count + " rows]"
                                         + (count > 0 ? respGetLKP.getData().getDetails().get(0) : "<empty>" )
+                                        + "\n----\nAddress[" + count + " rows]"
+                                        + (count > 0 ? respGetLKP.getData().getAddress().get(0) : "<empty>" )
                                         + "\n\nNetworkElapsed:" + swNetworkStr
                                         + "\nInsertElapsed:" + swInsert.stopAndGetAsString());
 //                                Utility.toast(getApplicationContext(), "Get Users Success");

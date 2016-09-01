@@ -103,6 +103,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Display User DB"/>
+            <Button
+                android:id="@+id/btnDisplayWithSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Display User DB and Search"/>
 
             <Button
                 android:id="@+id/btnDisplayThread"
