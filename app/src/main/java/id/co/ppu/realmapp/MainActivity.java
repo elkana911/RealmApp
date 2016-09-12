@@ -19,9 +19,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import id.co.ppu.realmapp.pojo.MstSecUser;
 import id.co.ppu.realmapp.pojo.MstUser;
-import id.co.ppu.realmapp.pojo.TrxCollectAddr;
-import id.co.ppu.realmapp.pojo.TrxLDVDetails;
-import id.co.ppu.realmapp.pojo.TrxLDVHeader;
+import id.co.ppu.realmapp.pojo.TrnCollectAddr;
+import id.co.ppu.realmapp.pojo.TrnLDVDetails;
+import id.co.ppu.realmapp.pojo.TrnLDVHeader;
 import id.co.ppu.realmapp.pojo.UserData;
 import id.co.ppu.realmapp.rest.ApiInterface;
 import id.co.ppu.realmapp.rest.ServiceGenerator;
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                         etPort.setText("8080");
                         break;
                     default:
-                        etIP.setText("192.168.0.6");
+                        etIP.setText("192.168.0.12");
                         etPort.setText("8090");
                 }
 
@@ -363,7 +363,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.btnGetLKP)
     public void onGetLKP(){
 
-        String collectorCode = "21160300";
+        String collectorCode = "21150164";
 
         ApiInterface fastService =
                 ServiceGenerator.createService(ApiInterface.class, buildUrl());
@@ -402,9 +402,9 @@ public class MainActivity extends AppCompatActivity {
                             public void execute(Realm bgRealm) {
                                 // insert header
                                 // wipe existing tables?
-                                long count = bgRealm.where(TrxLDVHeader.class).count();
+                                long count = bgRealm.where(TrnLDVHeader.class).count();
                                 if (count > 0) {
-                                    bgRealm.delete(TrxLDVHeader.class);
+                                    bgRealm.delete(TrnLDVHeader.class);
                                 }
                                 swInsert.start();
 //                                count = bgRealm.where(User.class).count();
@@ -412,16 +412,16 @@ public class MainActivity extends AppCompatActivity {
 //                                count = bgRealm.where(User.class).count();
 
                                 // insert details
-                                count = bgRealm.where(TrxLDVDetails.class).count();
+                                count = bgRealm.where(TrnLDVDetails.class).count();
                                 if (count > 0) {
-                                    bgRealm.delete(TrxLDVDetails.class);
+                                    bgRealm.delete(TrnLDVDetails.class);
                                 }
                                 bgRealm.copyToRealmOrUpdate(respGetLKP.getData().getDetails());
 
                                 // insert address
-                                count = bgRealm.where(TrxCollectAddr.class).count();
+                                count = bgRealm.where(TrnCollectAddr.class).count();
                                 if (count > 0) {
-                                    bgRealm.delete(TrxCollectAddr.class);
+                                    bgRealm.delete(TrnCollectAddr.class);
                                 }
                                 bgRealm.copyToRealmOrUpdate(respGetLKP.getData().getAddress());
                             }
@@ -431,7 +431,7 @@ public class MainActivity extends AppCompatActivity {
                                 if (mProgressDialog.isShowing())
                                     mProgressDialog.dismiss();
 
-                                TrxLDVHeader header = realm.where(TrxLDVHeader.class).findFirst();
+                                TrnLDVHeader header = realm.where(TrnLDVHeader.class).findFirst();
                                 int count = respGetLKP.getData().getDetails().size();
 //
 //                                btnGetUsers.setText("Display " + count + " users");

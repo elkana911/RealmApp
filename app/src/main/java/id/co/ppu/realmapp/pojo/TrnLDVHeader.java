@@ -12,7 +12,7 @@ import io.realm.annotations.PrimaryKey;
 /**
  * Created by Eric on 29-Aug-16.
  */
-public class TrxLDVHeader extends RealmObject implements Serializable {
+public class TrnLDVHeader extends RealmObject implements Serializable {
 
     @PrimaryKey
     @SerializedName("ldvNo")

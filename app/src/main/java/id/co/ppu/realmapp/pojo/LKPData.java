@@ -7,31 +7,49 @@ import java.util.List;
  */
 public class LKPData{
 
-    private TrxLDVHeader header;
-    private List<TrxLDVDetails> details;
-    private List<TrxCollectAddr> address;
+    private TrnLDVHeader header;
+    private List<TrnLDVDetails> details;
+    private List<TrnCollectAddr> address;
+    private List<TrnContractBuckets> buckets;
+    private List<TrnRVB> rvb;
 
-    public TrxLDVHeader getHeader() {
+    public TrnLDVHeader getHeader() {
         return header;
     }
 
-    public void setHeader(TrxLDVHeader header) {
+    public void setHeader(TrnLDVHeader header) {
         this.header = header;
     }
 
-    public List<TrxLDVDetails> getDetails() {
+    public List<TrnLDVDetails> getDetails() {
         return details;
     }
 
-    public void setDetails(List<TrxLDVDetails> details) {
+    public void setDetails(List<TrnLDVDetails> details) {
         this.details = details;
     }
 
-    public List<TrxCollectAddr> getAddress() {
+    public List<TrnCollectAddr> getAddress() {
         return address;
     }
 
-    public void setAddress(List<TrxCollectAddr> address) {
+    public void setAddress(List<TrnCollectAddr> address) {
         this.address = address;
+    }
+
+    public List<TrnContractBuckets> getBuckets() {
+        return buckets;
+    }
+
+    public void setBuckets(List<TrnContractBuckets> buckets) {
+        this.buckets = buckets;
+    }
+
+    public List<TrnRVB> getRvb() {
+        return rvb;
+    }
+
+    public void setRvb(List<TrnRVB> rvb) {
+        this.rvb = rvb;
     }
 }

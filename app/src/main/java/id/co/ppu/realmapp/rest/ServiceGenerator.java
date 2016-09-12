@@ -73,7 +73,8 @@ public class ServiceGenerator {
         date pattern tolong disamakan dgn yg di server
          */
         Gson gson = new GsonBuilder()
-                .setDateFormat("yyyy-MM-dd HH:mm:ss")   //"yyyy-MM-dd'T'HH:mm:ssZ"
+//                .setDateFormat("yyyy-MM-dd HH:mm:ss")   //"yyyy-MM-dd'T'HH:mm:ssZ"
+                .setDateFormat("dd-MM-yyyy HH:mm:ss")   //"yyyy-MM-dd'T'HH:mm:ssZ"
                 .create();
 
         /*

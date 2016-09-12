@@ -10,12 +10,12 @@ import io.realm.RealmObject;
 /**
  * Created by Eric on 01-Sep-16.
  */
-public class TrxCollectAddr extends RealmObject implements Serializable {
-    @SerializedName("contractNo")
-    private String contractNo;
+public class TrnCollectAddr extends RealmObject implements Serializable {
+    @SerializedName("pk")
+    private TrnCollectAddrPK pk;
 
-    @SerializedName("seq")
-    private SeqNo seq;
+    @SerializedName("seqNo")
+    private Long seqNo;
 
     @SerializedName("collAddr")
     private String collAddr;
@@ -95,20 +95,20 @@ public class TrxCollectAddr extends RealmObject implements Serializable {
     @SerializedName("lastupdateTimestamp")
     private Date lastupdateTimestamp;
 
-    public String getContractNo() {
-        return contractNo;
+    public TrnCollectAddrPK getPk() {
+        return pk;
     }
 
-    public void setContractNo(String contractNo) {
-        this.contractNo = contractNo;
+    public void setPk(TrnCollectAddrPK pk) {
+        this.pk = pk;
     }
 
-    public SeqNo getSeq() {
-        return seq;
+    public Long getSeqNo() {
+        return seqNo;
     }
 
-    public void setSeq(SeqNo seq) {
-        this.seq = seq;
+    public void setSeqNo(Long seqNo) {
+        this.seqNo = seqNo;
     }
 
     public String getCollAddr() {
@@ -289,9 +289,9 @@ public class TrxCollectAddr extends RealmObject implements Serializable {
 
     @Override
     public String toString() {
-        return "TrxCollectAddr{" +
-                "contractNo='" + contractNo + '\'' +
-                ", seq=" + seq +
+        return "TrnCollectAddr{" +
+                "pk=" + pk +
+                ", seqNo=" + seqNo +
                 ", collAddr='" + collAddr + '\'' +
                 ", collRt='" + collRt + '\'' +
                 ", collRw='" + collRw + '\'' +

@@ -7,11 +7,14 @@ import java.io.Serializable;
 import io.realm.RealmObject;
 
 /**
- * Created by Eric on 01-Sep-16.
+ * Created by Eric on 05-Sep-16.
  */
-public class SeqNo extends RealmObject implements Serializable {
+public class TrnCollectAddrPK extends RealmObject implements Serializable {
     @SerializedName("seqNo")
     private Long seqNo;
+
+    @SerializedName("contractNo")
+    private String contractNo;
 
     public Long getSeqNo() {
         return seqNo;
@@ -21,10 +24,19 @@ public class SeqNo extends RealmObject implements Serializable {
         this.seqNo = seqNo;
     }
 
+    public String getContractNo() {
+        return contractNo;
+    }
+
+    public void setContractNo(String contractNo) {
+        this.contractNo = contractNo;
+    }
+
     @Override
     public String toString() {
-        return "SeqNo{" +
+        return "TrnCollectAddrPK{" +
                 "seqNo=" + seqNo +
+                ", contractNo='" + contractNo + '\'' +
                 '}';
     }
 }
